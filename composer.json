@@ -1,0 +1,22 @@
+{
+  "name": "p-12s/get-country-code-by-ip",
+  "description": "The package will help you find the country code by ip-address",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "p-12s",
+      "email": "p12s@yandex.ru"
+    }
+  ],
+  "require": {
+    "php": "^7.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "8.4.3"
+  },
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  }
+}
