@@ -1,11 +1,346 @@
 <?php
+// I took the code from the repository https://github.com/dostelon/TabGeo
+// and very grateful to the author @dostelon
+
+/*
+"AF" => "Afghanistan",
+"AX" => "Aland Islands",
+"AL" => "Albania",
+"DZ" => "Algeria",
+"AS" => "American Samoa",
+"AD" => "Andorra",
+"AO" => "Angola",
+"AI" => "Anguilla",
+"AQ" => "Antarctica",
+"AG" => "Antigua and Barbuda",
+"AR" => "Argentina",
+"AM" => "Armenia",
+"AW" => "Aruba",
+"AU" => "Australia",
+"AT" => "Austria",
+"AZ" => "Azerbaijan",
+"BS" => "Bahamas",
+"BH" => "Bahrain",
+"BD" => "Bangladesh",
+"BB" => "Barbados",
+"BY" => "Belarus",
+"BE" => "Belgium",
+"BZ" => "Belize",
+"BJ" => "Benin",
+"BM" => "Bermuda",
+"BT" => "Bhutan",
+"BO" => "Bolivia",
+"BA" => "Bosnia and Herzegovina",
+"BW" => "Botswana",
+"BV" => "Bouvet Island",
+"BR" => "Brazil",
+"VG" => "British Virgin Islands",
+"IO" => "British Indian Ocean Territory",
+"BN" => "Brunei Darussalam",
+"BG" => "Bulgaria",
+"BF" => "Burkina Faso",
+"BI" => "Burundi",
+"KH" => "Cambodia",
+"CM" => "Cameroon",
+"CA" => "Canada",
+"CV" => "Cape Verde",
+"KY" => "Cayman Islands",
+"CF" => "Central African Republic",
+"TD" => "Chad",
+"CL" => "Chile",
+"CN" => "China",
+"HK" => "Hong Kong, SAR China",
+"MO" => "Macao, SAR China",
+"CX" => "Christmas Island",
+"CC" => "Cocos (Keeling) Islands",
+"CO" => "Colombia",
+"KM" => "Comoros",
+"CG" => "Congo (Brazzaville",
+"CD" => "Congo, (Kinshasa",
+"CK" => "Cook Islands",
+"CR" => "Costa Rica",
+"CI" => "Côte d'Ivoire",
+"HR" => "Croatia",
+"CU" => "Cuba",
+"CY" => "Cyprus",
+"CZ" => "Czech Republic",
+"DK" => "Denmark",
+"DJ" => "Djibouti",
+"DM" => "Dominica",
+"DO" => "Dominican Republic",
+"EC" => "Ecuador",
+"EG" => "Egypt",
+"SV" => "El Salvador",
+"GQ" => "Equatorial Guinea",
+"ER" => "Eritrea",
+"EE" => "Estonia",
+"ET" => "Ethiopia",
+"FK" => "Falkland Islands (Malvinas",
+"FO" => "Faroe Islands",
+"FJ" => "Fiji",
+"FI" => "Finland",
+"FR" => "France",
+"GF" => "French Guiana",
+"PF" => "French Polynesia",
+"TF" => "French Southern Territories",
+"GA" => "Gabon",
+"GM" => "Gambia",
+"GE" => "Georgia",
+"DE" => "Germany",
+"GH" => "Ghana",
+"GI" => "Gibraltar",
+"GR" => "Greece",
+"GL" => "Greenland",
+"GD" => "Grenada",
+"GP" => "Guadeloupe",
+"GU" => "Guam",
+"GT" => "Guatemala",
+"GG" => "Guernsey",
+"GN" => "Guinea",
+"GW" => "Guinea-Bissau",
+"GY" => "Guyana",
+"HT" => "Haiti",
+"HM" => "Heard and Mcdonald Islands",
+"VA" => "Holy See (Vatican City State",
+"HN" => "Honduras",
+"HU" => "Hungary",
+"IS" => "Iceland",
+"IN" => "India",
+"ID" => "Indonesia",
+"IR" => "Iran, Islamic Republic of",
+"IQ" => "Iraq",
+"IE" => "Ireland",
+"IM" => "Isle of Man",
+"IL" => "Israel",
+"IT" => "Italy",
+"JM" => "Jamaica",
+"JP" => "Japan",
+"JE" => "Jersey",
+"JO" => "Jordan",
+"KZ" => "Kazakhstan",
+"KE" => "Kenya",
+"KI" => "Kiribati",
+"KP" => "Korea (North",
+"KR" => "Korea (South",
+"KW" => "Kuwait",
+"KG" => "Kyrgyzstan",
+"LA" => "Lao PDR",
+"LV" => "Latvia",
+"LB" => "Lebanon",
+"LS" => "Lesotho",
+"LR" => "Liberia",
+"LY" => "Libya",
+"LI" => "Liechtenstein",
+"LT" => "Lithuania",
+"LU" => "Luxembourg",
+"MK" => "Macedonia, Republic of",
+"MG" => "Madagascar",
+"MW" => "Malawi",
+"MY" => "Malaysia",
+"MV" => "Maldives",
+"ML" => "Mali",
+"MT" => "Malta",
+"MH" => "Marshall Islands",
+"MQ" => "Martinique",
+"MR" => "Mauritania",
+"MU" => "Mauritius",
+"YT" => "Mayotte",
+"MX" => "Mexico",
+"FM" => "Micronesia, Federated States of",
+"MD" => "Moldova",
+"MC" => "Monaco",
+"MN" => "Mongolia",
+"ME" => "Montenegro",
+"MS" => "Montserrat",
+"MA" => "Morocco",
+"MZ" => "Mozambique",
+"MM" => "Myanmar",
+"NA" => "Namibia",
+"NR" => "Nauru",
+"NP" => "Nepal",
+"NL" => "Netherlands",
+"AN" => "Netherlands Antilles",
+"NC" => "New Caledonia",
+"NZ" => "New Zealand",
+"NI" => "Nicaragua",
+"NE" => "Niger",
+"NG" => "Nigeria",
+"NU" => "Niue",
+"NF" => "Norfolk Island",
+"MP" => "Northern Mariana Islands",
+"NO" => "Norway",
+"OM" => "Oman",
+"PK" => "Pakistan",
+"PW" => "Palau",
+"PS" => "Palestinian Territory",
+"PA" => "Panama",
+"PG" => "Papua New Guinea",
+"PY" => "Paraguay",
+"PE" => "Peru",
+"PH" => "Philippines",
+"PN" => "Pitcairn",
+"PL" => "Poland",
+"PT" => "Portugal",
+"PR" => "Puerto Rico",
+"QA" => "Qatar",
+"RE" => "Réunion",
+"RO" => "Romania",
+"RU" => "Russian Federation",
+"RW" => "Rwanda",
+"BL" => "Saint-Barthélemy",
+"SH" => "Saint Helena",
+"KN" => "Saint Kitts and Nevis",
+"LC" => "Saint Lucia",
+"MF" => "Saint-Martin (French part",
+"PM" => "Saint Pierre and Miquelon",
+"VC" => "Saint Vincent and Grenadines",
+"WS" => "Samoa",
+"SM" => "San Marino",
+"ST" => "Sao Tome and Principe",
+"SA" => "Saudi Arabia",
+"SN" => "Senegal",
+"RS" => "Serbia",
+"SC" => "Seychelles",
+"SL" => "Sierra Leone",
+"SG" => "Singapore",
+"SK" => "Slovakia",
+"SI" => "Slovenia",
+"SB" => "Solomon Islands",
+"SO" => "Somalia",
+"ZA" => "South Africa",
+"GS" => "South Georgia and the South Sandwich Islands",
+"SS" => "South Sudan",
+"ES" => "Spain",
+"LK" => "Sri Lanka",
+"SD" => "Sudan",
+"SR" => "Suriname",
+"SJ" => "Svalbard and Jan Mayen Islands",
+"SZ" => "Swaziland",
+"SE" => "Sweden",
+"CH" => "Switzerland",
+"SY" => "Syrian Arab Republic (Syria",
+"TW" => "Taiwan, Republic of China",
+"TJ" => "Tajikistan",
+"TZ" => "Tanzania, United Republic of",
+"TH" => "Thailand",
+"TL" => "Timor-Leste",
+"TG" => "Togo",
+"TK" => "Tokelau",
+"TO" => "Tonga",
+"TT" => "Trinidad and Tobago",
+"TN" => "Tunisia",
+"TR" => "Turkey",
+"TM" => "Turkmenistan",
+"TC" => "Turks and Caicos Islands",
+"TV" => "Tuvalu",
+"UG" => "Uganda",
+"UA" => "Ukraine",
+"AE" => "United Arab Emirates",
+"GB" => "United Kingdom",
+"US" => "United States of America",
+"UM" => "US Minor Outlying Islands",
+"UY" => "Uruguay",
+"UZ" => "Uzbekistan",
+"VU" => "Vanuatu",
+"VE" => "Venezuela (Bolivarian Republic",
+"VN" => "Viet Nam",
+"VI" => "Virgin Islands, US",
+"WF" => "Wallis and Futuna Islands",
+"EH" => "Western Sahara",
+"YE" => "Yemen",
+"ZM" => "Zambia",
+"ZW" => "Zimbabwe",
+"NO" => "Norway",
+"NF" => "Norfolk Island",
+"MP" => "Northern Mariana Islands",
+"EE" => "Estonia",
+"LV" => "Latvia",
+"LT" => "Lithuania",
+    // Europe codes:
+"FI" => "Finland",
+"FR" => "France",
+"SZ" => "Swaziland",
+"SE" => "Sweden",
+"NO" => "Norway",
+"EE" => "Estonia",
+"LV" => "Latvia",
+"LT" => "Lithuania",
+"BY" => "Belarus",
+"PL" => "Poland",
+"DE" => "Germany",
+"UA" => "Ukraine",
+"SK" => "Slovakia",
+"SI" => "Slovenia",
+"CZ" => "Czech Republic",
+"BE" => "Belgium",
+"NL" => "Netherlands",
+"IE" => "Ireland",
+"GB" => "United Kingdom",
+"FR" => "France",
+"ES" => "Spain",
+"IT" => "Italy",
+"PT" => "Portugal",
+"GR" => "Greece",
+"BG" => "Bulgaria",
+"AL" => "Albania",
+"RO" => "Romania",
+"HU" => "Hungary",
+"AU" => "Austria",
+"AT" => "Austria",
+"SK" => "Slovakia",
+"SI" => "Slovenia",
+"HR" => "Croatia",
+"BA" => "Bosnia and Herzegovina",
+"MK" => "Macedonia, the Former Yugoslav Republic of",
+"MD" => "Moldova, Republic of",
+"IS" => "Iceland",
+"DK" => "Denmark"
+*/
 
 namespace CountryCodeFinder;
 
 class CountryCodeFinder {
-    function find($ip){
-        $fh = fopen(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'countries.dat', 'rb');
-        $iso = array('AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ',
+    protected $countryFilePath;
+    protected $fileDescriptor;
+    protected $codes;
+
+    function __construct()
+    {
+        $this->countryFilePath = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'countries.dat';
+        $this->readFile();
+        $this->loadCodes();
+    }
+
+    function __destruct() {
+        if ($this->fileDescriptor) {
+            fclose($this->fileDescriptor);
+        }
+    }
+
+    public function getCode($ip){
+        $ip_array = explode('.', $ip);
+        fseek($this->fileDescriptor, ($ip_array[0] * 256 + $ip_array[1]) * 4);
+        $index_bin = fread($this->fileDescriptor, 4);
+        $index = unpack('Noffset/Clength', "\x00$index_bin");
+        if($index['offset'] == 16777215) return $this->codes[$index['length']];
+        fseek($this->fileDescriptor, $index['offset'] * 5 + 262144);
+        $bin = fread($this->fileDescriptor, ($index['length'] + 1) * 5);
+        $d = $this->tabgeo_bs(str_split($bin, 5), $ip_array[2], TRUE);
+        if($d['offset'] == 16777215) return $this->codes[$d['cc_id']];
+        if($ip_array[2] > $d['ip']) $ip_array[3] = 255;
+        fseek($this->fileDescriptor, -(($d['offset'] + 1 + $d['cc_id']) * 2), SEEK_END);
+        $bin = fread($this->fileDescriptor, ($d['cc_id'] + 1) * 2);
+        $d = $this->tabgeo_bs(str_split($bin, 2), $ip_array[3], FALSE);
+
+        return $this->codes[$d['cc_id']];
+    }
+
+    private function readFile() {
+        $this->fileDescriptor = fopen($this->countryFilePath, 'rb');
+    }
+
+    private function loadCodes() {
+        $this->codes = array('AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ',
             'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS',
             'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN',
             'CO', 'CR', 'CU', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE',
@@ -22,33 +357,18 @@ class CountryCodeFinder {
             'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI',
             'VN', 'VU', 'WF', 'WS', 'YE', 'YT', 'ZA', 'ZM', 'ZW', 'XA', 'YU', 'CS', 'AN', 'AA', 'EU', 'AP',
         );
-        $tabgeo_bs = function($data_array, $ip, $step){
-            $start = 0;
-            $end   = count($data_array) - 1;
-            while (true) {
-                $mid    = floor(($start + $end) / 2);
-                $unpack = $step ? unpack('Noffset/Cip/Ccc_id', "\x00$data_array[$mid]") : unpack('Cip/Ccc_id', $data_array[$mid]);
-                if ($unpack['ip'] == $ip) return $unpack;
-                if ($end - $start  <   0) return $ip > $unpack['ip'] ? $unpack : $unpack_prev;
-                if ($unpack['ip']  > $ip) $end = $mid - 1; else $start = $mid + 1;
-                $unpack_prev = $unpack;
-            }
-        };
+    }
 
-        $ip_array = explode('.', $ip);
-        fseek($fh, ($ip_array[0] * 256 + $ip_array[1]) * 4);
-        $index_bin = fread($fh, 4);
-        $index = unpack('Noffset/Clength', "\x00$index_bin");
-        if($index['offset'] == 16777215) return $iso[$index['length']];
-        fseek($fh, $index['offset'] * 5 + 262144);
-        $bin = fread($fh, ($index['length'] + 1) * 5);
-        $d = $tabgeo_bs(str_split($bin, 5), $ip_array[2], TRUE);
-        if($d['offset'] == 16777215) return $iso[$d['cc_id']];
-        if($ip_array[2] > $d['ip']) $ip_array[3] = 255;
-        fseek($fh, -(($d['offset'] + 1 + $d['cc_id']) * 2), SEEK_END);
-        $bin = fread($fh, ($d['cc_id'] + 1) * 2);
-        $d = $tabgeo_bs(str_split($bin, 2), $ip_array[3], FALSE);
-
-        return $iso[$d['cc_id']];
+    private function tabgeo_bs($data_array, $ip, $step) {
+        $start = 0;
+        $end   = count($data_array) - 1;
+        while (true) {
+            $mid    = floor(($start + $end) / 2);
+            $unpack = $step ? unpack('Noffset/Cip/Ccc_id', "\x00$data_array[$mid]") : unpack('Cip/Ccc_id', $data_array[$mid]);
+            if ($unpack['ip'] == $ip) return $unpack;
+            if ($end - $start  <   0) return $ip > $unpack['ip'] ? $unpack : $unpack_prev;
+            if ($unpack['ip']  > $ip) $end = $mid - 1; else $start = $mid + 1;
+            $unpack_prev = $unpack;
+        }
     }
 }
