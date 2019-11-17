@@ -10,4 +10,5 @@ Using:
 // require_once('vendor/p-12s/get-country-code-by-ip/src/CountryCodeFinder.php');   
 $finder = new CountryCodeFinder\CountryCodeFinder();
 echo $finder->getCode('178.200.170.41'); // DE
+echo $finder->getCode('176.31.69.179'); // BE
 ```
